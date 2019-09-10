@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,8 +33,9 @@ namespace DotNetCoreInternationalization
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddLocalization(options => options.ResourcesPath="Resources");
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();//.AddViewLocalization(;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +53,17 @@ namespace DotNetCoreInternationalization
             }
 
             app.UseHttpsRedirection();
+            var supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("fr-CA")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
