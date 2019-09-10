@@ -35,7 +35,11 @@ namespace DotNetCoreInternationalization
 
             services.AddLocalization(options => options.ResourcesPath="Resources");
 
-            services.AddMvc();//.AddViewLocalization(;
+            services
+                .AddMvc()
+                .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.SubFolder)
+                .AddDataAnnotationsLocalization()
+                ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

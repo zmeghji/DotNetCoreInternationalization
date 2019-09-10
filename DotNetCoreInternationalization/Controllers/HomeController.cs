@@ -11,6 +11,14 @@ namespace DotNetCoreInternationalization.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Paragraphs()
+        {
+            return View();
+        }
+        public IActionResult AddBook()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

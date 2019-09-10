@@ -1,0 +1,10 @@
+﻿@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Paragraphs";
+}
+<p>@Localizer.GetString("P1")</p>
+<p>@Localizer.GetString("P2")</p>
+<p>@Localizer.GetString("P3")</p>
+
+
